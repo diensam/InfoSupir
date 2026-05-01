@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>SupirInfo — Panduan Lengkap Driver Jabodetabek</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo" onclick="switchPage('beranda')">S<span>upir</span>Info</div>
+    <div class="header-right">
+      <div class="loc-badge pulsing" id="locBadge" onclick="refreshLocation()" title="Refresh lokasi">
+        <div class="loc-dot" id="locDot"></div>
+        <span id="locLabel">Deteksi...</span>
+      </div>
+      <div class="date-badge" id="headerDate"></div>
+      <button class="settings-btn" onclick="switchPage('settings')" title="Pengaturan">⚙️</button>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="main">
+    <!-- BERANDA -->
+    <div class="page active" id="page-beranda">
+      <div class="hero">
+        <div class="ganjil-genap-banner" onclick="switchPage('ganjil-genap')">
+          <div class="gg-left">
+            <h2>Hari Ini</h2>
+            <div class="gg-status ganjil" id="ggStatus">GANJIL</div>
+            <div class="gg-detail" id="ggDetail"></div>
+          </div>
+          <div class="gg-right">
+            <div class="gg-time" id="ggClock">--:--:--</div>
+            <div class="gg-info" id="ggActiveNow">Sedang berlaku</div>
+          </div>
+        </div>
+      </div>
+      <div id="tickerContainer" style="padding:4px 20px 0;"></div>
+      <div style="padding:8px 20px 0">
+        <div class="near-me-banner" onclick="showNearMe()">
+          <div class="near-me-icon">📍</div>
+          <div class="near-me-text">
+            <div class="near-me-title">Tempat Terdekat dari Anda</div>
+            <div class="near-me-sub" id="nearMeSub">Izinkan lokasi untuk melihat jarak</div>
+          </div>
+          <div style="font-size:20px;color:var(--text3)">→</div>
+        </div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="mainSearch" placeholder="Cari tempat, mall, golf, stasiun..." oninput="handleMainSearch(this.value)">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <div class="nav-grid">
+        <div class="nav-card" onclick="switchPage('ganjil-genap')"><div class="nav-icon">🚗</div><div class="nav-label">Ganjil Genap</div></div>
+        <div class="nav-card" onclick="switchPage('toll')"><div class="nav-icon">🛣️</div><div class="nav-label">Info Tol & Tarif</div></div>
+        <div class="nav-card" onclick="switchPage('tempat')"><div class="nav-icon">📍</div><div class="nav-label">Tempat & Wisata</div></div>
+        <div class="nav-card" onclick="switchPage('golf')"><div class="nav-icon">⛳</div><div class="nav-label">Golf Course</div></div>
+        <div class="nav-card" onclick="switchPage('bandara')"><div class="nav-icon">✈️</div><div class="nav-label">Bandara & Stasiun</div></div>
+        <div class="nav-card" onclick="switchPage('mall')"><div class="nav-icon">🏬</div><div class="nav-label">Mall & Hotel</div></div>
+      </div>
+      <div class="section" id="homeTollUpdates"></div>
+    </div>
+
+    <!-- GANJIL GENAP -->
+    <div class="page" id="page-ganjil-genap">
+      <div style="padding:16px 20px 0">
+        <div class="info-box"><strong>Ganjil Genap</strong> berlaku Senin–Jumat (kecuali hari libur nasional), pukul <strong>06:00–10:00</strong> dan <strong>16:00–21:00</strong>.</div>
+      </div>
+      <div class="section">
+        <div class="section-title">Ruas Ganjil Genap Jakarta 2024</div>
+        <div id="ggTableContainer" style="overflow-x:auto;border-radius:12px;border:1px solid var(--border);"></div>
+      </div>
+    </div>
+
+    <!-- TOLL -->
+    <div class="page" id="page-toll">
+      <div id="tollCalculator" style="padding:16px 20px 8px"></div>
+      <div class="section" id="tollListSection"></div>
+    </div>
+
+    <!-- TEMPAT -->
+    <div class="page" id="page-tempat">
+      <div class="filter-tabs" id="tempatFilter"></div>
+      <div class="section" id="tempatList"></div>
+    </div>
+
+    <!-- GOLF -->
+    <div class="page" id="page-golf">
+      <div class="filter-tabs" id="golfFilter"></div>
+      <div class="section" id="golfList"></div>
+    </div>
+
+    <!-- BANDARA & STASIUN -->
+    <div class="page" id="page-bandara">
+      <div class="section" id="bandaraList"></div>
+    </div>
+
+    <!-- MALL & HOTEL -->
+    <div class="page" id="page-mall">
+      <div class="filter-tabs" id="mallFilter"></div>
+      <div class="section" id="mallList"></div>
+    </div>
+
+    <!-- SOS -->
+    <div class="page" id="page-sos">
+      <div class="section" id="sosList"></div>
+    </div>
+
+    <!-- PENGATURAN -->
+    <div class="page" id="page-settings">
+      <div class="section" style="padding-top:16px">
+        <div class="section-title">Pengaturan</div>
+        <div class="settings-group">
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">🌓 Tema Gelap / Terang</div>
+              <div class="setting-desc">Ubah tampilan sesuai preferensi</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">📏 Satuan Jarak</div>
+              <div class="setting-desc">Tampilkan jarak dalam Kilometer atau Mil</div>
+            </div>
+            <select class="calc-select" id="unitSelect" onchange="changeUnit()" style="width:auto;margin:0;padding:8px 12px;">
+              <option value="km">Kilometer (km)</option>
+              <option value="mi">Mil (mi)</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">⭐ Hapus Semua Favorit</div>
+              <div class="setting-desc">Reset daftar tempat favorit</div>
+            </div>
+            <button class="calc-btn" style="width:auto;padding:8px 16px;" onclick="resetFavorites()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="bottom-nav-item active" id="nav-beranda" onclick="switchPage('beranda')"><div class="bottom-nav-icon">🏠</div><span>Beranda</span></div>
+    <div class="bottom-nav-item" id="nav-toll" onclick="switchPage('toll')"><div class="bottom-nav-icon">🛣️</div><span>Info Tol</span></div>
+    <div class="bottom-nav-item" id="nav-tempat" onclick="switchPage('tempat')"><div class="bottom-nav-icon">📍</div><span>Tempat</span></div>
+    <div class="bottom-nav-item" id="nav-sos" onclick="switchPage('sos')"><div class="bottom-nav-icon">🆘</div><span>SOS</span></div>
+  </nav>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modalContent">
+      <div class="modal-handle"></div>
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      <div class="modal-title" id="modalTitle">Detail</div>
+      <div class="modal-sub" id="modalSub"></div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
