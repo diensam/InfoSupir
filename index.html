@@ -16,6 +16,7 @@
         <span id="locLabel">Deteksi...</span>
       </div>
       <div class="date-badge" id="headerDate"></div>
+      <button class="settings-btn" onclick="switchPage('settings')" title="Pengaturan">⚙️</button>
     </div>
   </header>
 
@@ -120,6 +121,42 @@
     <!-- PAGE: SOS -->
     <div class="page" id="page-sos">
       <div class="section" id="sosList"></div>
+    </div>
+
+    <!-- PAGE: PENGATURAN -->
+    <div class="page" id="page-settings">
+      <div class="section" style="padding-top:16px">
+        <div class="section-title">Pengaturan</div>
+        <div class="settings-group">
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">🌓 Tema Gelap / Terang</div>
+              <div class="setting-desc">Ubah tampilan sesuai preferensi</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">📏 Satuan Jarak</div>
+              <div class="setting-desc">Tampilkan jarak dalam Kilometer atau Mil</div>
+            </div>
+            <select class="calc-select" id="unitSelect" onchange="changeUnit()" style="width:auto;margin:0;padding:8px 12px;">
+              <option value="km">Kilometer (km)</option>
+              <option value="mi">Mil (mi)</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">⭐ Hapus Semua Favorit</div>
+              <div class="setting-desc">Reset daftar tempat favorit</div>
+            </div>
+            <button class="calc-btn" style="width:auto;padding:8px 16px;" onclick="resetFavorites()">Reset</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
