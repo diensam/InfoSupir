@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupirInfo — Panduan Lengkap Driver Jabodetabek</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f12;
+  --surface: #1a1a20;
+  --surface2: #22222a;
+  --border: #2e2e38;
+  --accent: #f5a623;
+  --accent2: #4fc3f7;
+  --green: #4caf84;
+  --red: #e05c5c;
+  --yellow: #f5c842;
+  --text: #e8e8f0;
+  --text2: #8888a0;
+  --text3: #555568;
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15,15,18,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+  color: var(--accent);
+}
+.logo span { color: var(--text); }
+.header-right { display: flex; gap: 8px; align-items: center; }
+.date-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; color: var(--text2);
+  font-family: var(--mono);
+}
+
+/* HERO */
+.hero {
+  padding: 24px 20px 16px;
+  background: linear-gradient(135deg, #1a1a20 0%, #12121a 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ganjil-genap-banner {
+  background: linear-gradient(135deg, var(--surface2), var(--surface));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gg-left h2 { font-size: 13px; color: var(--text2); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+.gg-left .gg-status { font-size: 28px; font-weight: 800; letter-spacing: -1px; margin-top: 2px; }
+.gg-left .gg-status.ganjil { color: var(--accent); }
+.gg-left .gg-status.genap { color: var(--accent2); }
+.gg-detail { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.gg-right { text-align: right; }
+.gg-time { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+.gg-info { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+/* NAV GRID */
+.nav-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 16px 20px;
+}
+.nav-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none; color: inherit;
+}
+.nav-card:hover { border-color: var(--accent); background: var(--surface2); transform: translateY(-1px); }
+.nav-card.active { border-color: var(--accent); background: rgba(245,166,35,0.08); }
+.nav-icon { font-size: 26px; margin-bottom: 6px; }
+.nav-label { font-size: 11px; font-weight: 600; color: var(--text2); line-height: 1.3; }
+
+/* SEARCH */
+.search-bar {
+  margin: 0 20px 16px;
+  position: relative;
+}
+.search-bar input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px 12px 42px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-bar input:focus { border-color: var(--accent); }
+.search-bar input::placeholder { color: var(--text3); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 16px; }
+
+/* SECTIONS */
+.section { padding: 0 20px 20px; }
+.section-title {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--text3);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* TOLL CARDS */
+.toll-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.toll-card:hover { border-color: var(--accent2); }
+.toll-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.toll-name { font-size: 14px; font-weight: 700; }
+.toll-tarif { font-family: var(--mono); font-size: 13px; color: var(--accent); font-weight: 500; }
+.toll-meta { display: flex; gap: 12px; }
+.toll-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); }
+.toll-distance { font-family: var(--mono); }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.status-dot.lancar { background: var(--green); }
+.status-dot.padat { background: var(--yellow); }
+.status-dot.macet { background: var(--red); }
+
+/* STATUS TAG */
+.status-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.status-tag.lancar { background: rgba(76,175,132,0.15); color: var(--green); }
+.status-tag.padat { background: rgba(245,200,66,0.15); color: var(--yellow); }
+.status-tag.macet { background: rgba(224,92,92,0.15); color: var(--red); }
+
+/* PLACE CARD */
+.place-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.place-card:hover { border-color: var(--accent2); }
+.place-icon-box {
+  width: 44px; height: 44px;
+  background: var(--surface2);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.place-info { flex: 1; }
+.place-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.place-meta { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+.place-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.place-tag {
+  padding: 2px 8px; border-radius: 20px;
+  font-size: 10px; font-weight: 600;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text2);
+}
+.place-tag.highlight { border-color: var(--accent); color: var(--accent); background: rgba(245,166,35,0.08); }
+
+/* FILTER TABS */
+.filter-tabs {
+  display: flex; gap: 6px; overflow-x: auto;
+  padding: 0 20px 14px;
+  scrollbar-width: none;
+}
+.filter-tabs::-webkit-scrollbar { display: none; }
+.filter-tab {
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  white-space: nowrap; cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  transition: all 0.2s;
+}
+.filter-tab.active { background: var(--accent); border-color: var(--accent); color: #000; }
+.filter-tab:hover:not(.active) { border-color: var(--text3); }
+
+/* MODAL / DETAIL VIEW */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200; backdrop-filter: blur(4px);
+}
+.modal-overlay.show { display: flex; align-items: flex-end; }
+.modal {
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  width: 100%; max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.show .modal { transform: translateY(0); }
+.modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px; }
+.modal-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
+.modal-close { position: absolute; right: 20px; top: 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--text2); }
+.detail-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--text2); }
+.detail-value { font-weight: 600; font-family: var(--mono); }
+.detail-value.accent { color: var(--accent); }
+.detail-value.green { color: var(--green); }
+.detail-value.red { color: var(--red); }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(15,15,18,0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex; padding: 8px 0 20px;
+  z-index: 100;
+}
+.bottom-nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 4px; cursor: pointer; padding: 4px;
+  transition: color 0.2s;
+  color: var(--text3);
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.bottom-nav-item.active { color: var(--accent); }
+.bottom-nav-icon { font-size: 20px; }
+
+/* MAIN CONTENT AREA */
+.main { padding-bottom: 80px; }
+.page { display: none; }
+.page.active { display: block; }
+
+/* GANJIL GENAP TABLE */
+.gg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.gg-table th { background: var(--surface2); padding: 8px 10px; text-align: left; color: var(--text3); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.gg-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.gg-table tr:hover td { background: var(--surface2); }
+.ruas { font-weight: 600; font-size: 12px; }
+.jam { font-family: var(--mono); color: var(--text2); font-size: 11px; }
+.gg-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; }
+.gg-badge.g { background: rgba(245,166,35,0.15); color: var(--accent); }
+.gg-badge.e { background: rgba(79,195,247,0.15); color: var(--accent2); }
+.gg-badge.ge { background: rgba(76,175,132,0.15); color: var(--green); }
+
+/* CALCULATOR */
+.calc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.calc-label { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.calc-select, .calc-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 10px;
+  appearance: none;
+}
+.calc-select:focus, .calc-input:focus { border-color: var(--accent); }
+.calc-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-family: var(--font);
+  font-size: 14px; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.5px;
+  transition: opacity 0.2s;
+}
+.calc-btn:hover { opacity: 0.9; }
+.result-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 12px;
+  display: none;
+}
+.result-box.show { display: block; }
+.result-title { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.result-main { font-size: 28px; font-weight: 800; color: var(--accent); font-family: var(--mono); }
+.result-sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+/* UPDATE TICKER */
+.update-ticker {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px;
+}
+.ticker-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ticker-text { flex: 1; color: var(--text2); }
+.ticker-time { color: var(--text3); font-family: var(--mono); font-size: 11px; }
+
+/* RESPONSIVE */
+@media(min-width: 480px) {
+  body { max-width: 480px; margin: 0 auto; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.page.active { animation: fadeIn 0.25s ease; }
+
+/* CHIP */
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.chip {
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2); cursor: pointer;
+  transition: all 0.15s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { border-color: var(--accent); background: rgba(245,166,35,0.1); color: var(--accent); }
+
+/* SOS */
+.sos-card {
+  background: rgba(224,92,92,0.08);
+  border: 1px solid rgba(224,92,92,0.3);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sos-icon { font-size: 28px; }
+.sos-info { flex: 1; }
+.sos-name { font-size: 14px; font-weight: 700; }
+.sos-number { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-top: 2px; }
+.sos-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.sos-call { background: var(--red); color: #fff; border: none; border-radius: 10px; padding: 8px 14px; font-family: var(--font); font-size: 12px; font-weight: 700; cursor: pointer; }
+
+.info-box {
+  background: rgba(79,195,247,0.07);
+  border: 1px solid rgba(79,195,247,0.2);
+  border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;
+  font-size: 12px; color: var(--text2); line-height: 1.6;
+}
+.info-box strong { color: var(--accent2); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">S<span>upir</span>Info</div>
+  <div class="header-right">
+    <div class="date-badge" id="headerDate">Selasa, 28 Nov 2023</div>
+  </div>
+</header>
+
+<div class="main">
+
+<!-- PAGE: BERANDA -->
+<div class="page active" id="page-beranda">
+  <div class="hero">
+    <div class="ganjil-genap-banner">
+      <div class="gg-left">
+        <h2>Hari Ini</h2>
+        <div class="gg-status ganjil" id="ggStatus">GANJIL</div>
+        <div class="gg-detail" id="ggDetail">Berlaku 06:00–10:00 & 16:00–21:00</div>
+      </div>
+      <div class="gg-right">
+        <div class="gg-time" id="ggClock">--:--:--</div>
+        <div class="gg-info" id="ggActiveNow">Sedang berlaku</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:4px 20px 0; display:flex; gap:8px; flex-wrap:wrap;">
+    <div class="update-ticker">
+      <div class="ticker-dot" style="background:var(--green)"></div>
+      <div class="ticker-text">Tol JKT–Ciampek (Cikarang): <strong>LANCAR</strong></div>
+      <div class="ticker-time">14m lalu</div>
+    </div>
+  </div>
+  <div style="padding:0 20px 4px; display:flex; gap:8px; flex-wrap:wrap;">
+    <div class="update-ticker">
+      <div class="ticker-dot" style="background:var(--yellow)"></div>
+      <div class="ticker-text">Tol JKT–Ciampek (Gempong): <strong>PADAT</strong></div>
+      <div class="ticker-time">15m lalu</div>
+    </div>
+  </div>
+
+  <div class="nav-grid">
+    <div class="nav-card" onclick="switchPage('ganjil-genap')">
+      <div class="nav-icon">🚗</div>
+      <div class="nav-label">Ganjil Genap</div>
+    </div>
+    <div class="nav-card" onclick="switchPage('toll')">
+      <div class="nav-icon">🛣️</div>
+      <div class="nav-label">Info Tol & Tarif</div>
+    </div>
+    <div class="nav-card" onclick="switchPage('tempat')">
+      <div class="nav-icon">📍</div>
+      <div class="nav-label">Tempat & Wisata</div>
+    </div>
+    <div class="nav-card" onclick="switchPage('golf')">
+      <div class="nav-icon">⛳</div>
+      <div class="nav-label">Golf Course</div>
+    </div>
+    <div class="nav-card" onclick="switchPage('bandara')">
+      <div class="nav-icon">✈️</div>
+      <div class="nav-label">Bandara & Stasiun</div>
+    </div>
+    <div class="nav-card" onclick="switchPage('mall')">
+      <div class="nav-icon">🏬</div>
+      <div class="nav-label">Mall & Hotel</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Update Jalur Tol</div>
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Tol Jagorawi</div>
+        <span class="status-tag lancar">● Lancar</span>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">🕐 <span>~25 menit</span></div>
+        <div class="toll-item">📏 <span class="toll-distance">50 km</span></div>
+        <div class="toll-item">💳 <span class="toll-distance">Rp 14.000</span></div>
+      </div>
+    </div>
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Tol Jakarta–Cikampek</div>
+        <span class="status-tag padat">● Padat</span>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">🕐 <span>~55 menit</span></div>
+        <div class="toll-item">📏 <span class="toll-distance">73 km</span></div>
+        <div class="toll-item">💳 <span class="toll-distance">Rp 20.000</span></div>
+      </div>
+    </div>
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Tol JORR</div>
+        <span class="status-tag lancar">● Lancar</span>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">🕐 <span>~20 menit</span></div>
+        <div class="toll-item">📏 <span class="toll-distance">45 km</span></div>
+        <div class="toll-item">💳 <span class="toll-distance">Rp 15.500</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: GANJIL GENAP -->
+<div class="page" id="page-ganjil-genap">
+  <div style="padding:16px 20px 0">
+    <div class="info-box">
+      <strong>Ganjil Genap</strong> berlaku Senin–Jumat (kecuali hari libur nasional), pukul <strong>06:00–10:00</strong> dan <strong>16:00–21:00</strong>. Kendaraan dengan plat sesuai hari (Ganjil/Genap) dilarang melintas di ruas tertentu.
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Ruas Ganjil Genap Jakarta 2024</div>
+    <div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border);">
+    <table class="gg-table">
+      <thead>
+        <tr>
+          <th>Ruas Jalan</th>
+          <th>Jam</th>
+          <th>Hari</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="ruas">Jl. Sudirman</div><div style="font-size:11px;color:var(--text3)">Bundaran Senayan–Jl. Ridwan Rais</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. MH Thamrin</div><div style="font-size:11px;color:var(--text3)">Bundaran HI–Jl. Medan Merdeka Barat</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. Gatot Subroto</div><div style="font-size:11px;color:var(--text3)">Bundaran Slipi–Semanggi</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. HR Rasuna Said</div><div style="font-size:11px;color:var(--text3)">Kuningan–Semanggi</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. Merdeka Barat/Utara</div><div style="font-size:11px;color:var(--text3)">Gambir area</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. Sisingamangaraja</div><div style="font-size:11px;color:var(--text3)">Blok M area</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. Tentara Pelajar</div><div style="font-size:11px;color:var(--text3)">Petamburan–Slipi</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Jl. Fatmawati</div><div style="font-size:11px;color:var(--text3)">Cilandak–Pondok Indah</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Tol Dalam Kota</div><div style="font-size:11px;color:var(--text3)">Slipi–Cawang–Tanjung Priok</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+        <tr>
+          <td><div class="ruas">Tol Jakarta–Cikampek</div><div style="font-size:11px;color:var(--text3)">Halim–Bekasi Barat (Km 0–47)</div></td>
+          <td><div class="jam">06:00–10:00</div><div class="jam">16:00–21:00</div></td>
+          <td><span class="gg-badge ge">Sen–Jum</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div style="margin-top:16px">
+      <div class="section-title">Cek Plat Nomor</div>
+      <div class="calc-card">
+        <div class="calc-label">Masukkan Nomor Plat</div>
+        <input class="calc-input" type="text" id="platInput" placeholder="Contoh: B 1234 ABC" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
+        <button class="calc-btn" onclick="cekPlat()">CEK STATUS PLAT</button>
+        <div class="result-box" id="platResult">
+          <div class="result-title">Hasil Cek</div>
+          <div class="result-main" id="platResultVal">—</div>
+          <div class="result-sub" id="platResultSub">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: TOLL -->
+<div class="page" id="page-toll">
+  <div style="padding:16px 20px 8px">
+    <div class="calc-card">
+      <div class="calc-label">Hitung Tarif Tol</div>
+      <select class="calc-select" id="tollAsal">
+        <option value="">-- Pilih Gerbang Asal --</option>
+        <option value="cikampek">Cikampek</option>
+        <option value="bekasi_barat">Bekasi Barat</option>
+        <option value="cibitung">Cibitung</option>
+        <option value="cikarang">Cikarang Utama</option>
+        <option value="halim">Halim</option>
+        <option value="pondok_gede">Pondok Gede</option>
+        <option value="cengkareng">Cengkareng (Bandara)</option>
+        <option value="bogor">Bogor (Jagorawi)</option>
+        <option value="ciawi">Ciawi</option>
+        <option value="serpong">Serpong</option>
+        <option value="tangerang">Tangerang</option>
+        <option value="karawang">Karawang</option>
+      </select>
+      <select class="calc-select" id="tollTujuan">
+        <option value="">-- Pilih Gerbang Tujuan --</option>
+        <option value="tomang">Tomang / Jakarta Barat</option>
+        <option value="semanggi">Semanggi / Sudirman</option>
+        <option value="cawang">Cawang / Jakarta Selatan</option>
+        <option value="tanjung_priok">Tanjung Priok</option>
+        <option value="pluit">Pluit / Jakarta Utara</option>
+        <option value="bekasi_barat">Bekasi Barat</option>
+        <option value="bekasi_timur">Bekasi Timur</option>
+        <option value="cibubur">Cibubur</option>
+        <option value="cinere">Cinere</option>
+        <option value="serpong">Serpong / BSD</option>
+        <option value="tangerang">Tangerang Kota</option>
+      </select>
+      <select class="calc-select" id="tollGol">
+        <option value="1">Golongan I (Sedan/SUV)</option>
+        <option value="2">Golongan II (MPV/Pickup kecil)</option>
+        <option value="3">Golongan III (Truk 2 as)</option>
+        <option value="4">Golongan IV (Truk 3 as)</option>
+        <option value="5">Golongan V (Truk 5 as)</option>
+      </select>
+      <button class="calc-btn" onclick="hitungToll()">HITUNG TARIF</button>
+      <div class="result-box" id="tollResult">
+        <div class="result-title">Estimasi Perjalanan</div>
+        <div class="result-main" id="tollResultTarif">—</div>
+        <div class="result-sub" id="tollResultInfo">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Tarif Populer (Gol I)</div>
+
+    <div class="toll-card" onclick="showTollDetail('jakarta-cikampek')">
+      <div class="toll-header">
+        <div class="toll-name">Jakarta ↔ Cikampek</div>
+        <div class="toll-tarif">Rp 20.000</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">73 km</span></div>
+        <div class="toll-item">🕐 <span>~60 menit</span></div>
+        <div class="toll-item"><span class="status-tag padat">● Padat</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card" onclick="showTollDetail('jakarta-bogor')">
+      <div class="toll-header">
+        <div class="toll-name">Jakarta ↔ Bogor (Jagorawi)</div>
+        <div class="toll-tarif">Rp 14.000</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">50 km</span></div>
+        <div class="toll-item">🕐 <span>~45 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Jakarta ↔ Tangerang (JORR)</div>
+        <div class="toll-tarif">Rp 9.000</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">28 km</span></div>
+        <div class="toll-item">🕐 <span>~30 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Jakarta ↔ Bekasi</div>
+        <div class="toll-tarif">Rp 12.500</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">32 km</span></div>
+        <div class="toll-item">🕐 <span>~40 menit</span></div>
+        <div class="toll-item"><span class="status-tag padat">● Padat</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Jakarta ↔ Karawang</div>
+        <div class="toll-tarif">Rp 35.000</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">85 km</span></div>
+        <div class="toll-item">🕐 <span>~75 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Bandara Soekarno-Hatta</div>
+        <div class="toll-tarif">Rp 18.500</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">22 km</span></div>
+        <div class="toll-item">🕐 <span>~35 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">JORR (Lingkar Luar)</div>
+        <div class="toll-tarif">Rp 15.500</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">45 km</span></div>
+        <div class="toll-item">🕐 <span>~50 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+
+    <div class="toll-card">
+      <div class="toll-header">
+        <div class="toll-name">Depok–Antasari (Desari)</div>
+        <div class="toll-tarif">Rp 11.500</div>
+      </div>
+      <div class="toll-meta">
+        <div class="toll-item">📏 <span class="toll-distance">21 km</span></div>
+        <div class="toll-item">🕐 <span>~25 menit</span></div>
+        <div class="toll-item"><span class="status-tag lancar">● Lancar</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: TEMPAT -->
+<div class="page" id="page-tempat">
+  <div class="filter-tabs" id="tempatFilter">
+    <div class="filter-tab active" onclick="filterTempat('semua',this)">Semua</div>
+    <div class="filter-tab" onclick="filterTempat('wisata',this)">Wisata</div>
+    <div class="filter-tab" onclick="filterTempat('pusat',this)">Pusat Kota</div>
+    <div class="filter-tab" onclick="filterTempat('bekasi',this)">Bekasi</div>
+    <div class="filter-tab" onclick="filterTempat('bogor',this)">Bogor</div>
+    <div class="filter-tab" onclick="filterTempat('karawang',this)">Karawang</div>
+    <div class="filter-tab" onclick="filterTempat('tangerang',this)">Tangerang</div>
+  </div>
+  <div class="section" id="tempatList">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<!-- PAGE: GOLF -->
+<div class="page" id="page-golf">
+  <div class="filter-tabs">
+    <div class="filter-tab active">Semua</div>
+    <div class="filter-tab">Jakarta</div>
+    <div class="filter-tab">Bekasi</div>
+    <div class="filter-tab">Karawang</div>
+    <div class="filter-tab">Bogor</div>
+    <div class="filter-tab">Tangerang</div>
+  </div>
+  <div class="section">
+    <div class="section-title">Golf Course Jabodetabek–Karawang</div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Pondok Indah Golf</div>
+        <div class="place-meta">📍 Jakarta Selatan · ⭐ 4.7</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Ruang Tunggu</span>
+          <span class="place-tag">Parkir Luas</span>
+          <span class="place-tag">27 Hole</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Jabotabek Golf & Country Club</div>
+        <div class="place-meta">📍 Cikarang · ⭐ 4.6</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Ruang Tunggu Supir</span>
+          <span class="place-tag">Parkir Teduh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Royale Jakarta Golf Club</div>
+        <div class="place-meta">📍 Jakarta Timur · ⭐ 4.5</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Akses Drop-off Mudah</span>
+          <span class="place-tag">Ada Ruang Tunggu Supir</span>
+          <span class="place-tag">Parkir Teduh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Sentul Highlands Golf Club</div>
+        <div class="place-meta">📍 Sentul, Bogor · ⭐ 4.8</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Akses Drop-off Mudah</span>
+          <span class="place-tag">Ruang Tunggu Supir</span>
+          <span class="place-tag">Parkir Teduh</span>
+          <span class="place-tag">18 Hole</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Karawang Golf & Country Club</div>
+        <div class="place-meta">📍 Karawang · ⭐ 4.4</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Parkir Luas</span>
+          <span class="place-tag">18 Hole</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">BSD Golf & Country Club</div>
+        <div class="place-meta">📍 BSD, Tangerang · ⭐ 4.5</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Ruang Tunggu</span>
+          <span class="place-tag">18 Hole</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Damai Indah Golf</div>
+        <div class="place-meta">📍 PIK, Jakarta Utara · ⭐ 4.3</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Parkir Luas</span>
+          <span class="place-tag">2 Lapangan</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">⛳</div>
+      <div class="place-info">
+        <div class="place-name">Bukit Darmo Golf</div>
+        <div class="place-meta">📍 Legok, Tangerang · ⭐ 4.5</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Drop-off Mudah</span>
+          <span class="place-tag">Ruang Supir</span>
+          <span class="place-tag">18 Hole</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: BANDARA & STASIUN -->
+<div class="page" id="page-bandara">
+  <div class="section">
+    <div class="section-title">Bandara</div>
+
+    <div class="place-card">
+      <div class="place-icon-box">✈️</div>
+      <div class="place-info">
+        <div class="place-name">Bandara Soekarno-Hatta (CGK)</div>
+        <div class="place-meta">📍 Cengkareng, Tangerang</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Terminal 1, 2, 3</span>
+          <span class="place-tag">Tol Sedyatmo</span>
+          <span class="place-tag">~35 menit dari Jakarta</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          💳 Tol: Rp 18.500 (Gol I) | 📏 22 km dari Jakarta Pusat
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">✈️</div>
+      <div class="place-info">
+        <div class="place-name">Bandara Halim Perdanakusuma (HLP)</div>
+        <div class="place-meta">📍 Jakarta Timur</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">Penerbangan Domestik</span>
+          <span class="place-tag">Akses Tol Dalam Kota</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          💳 Tanpa tol (bisa via Cawang) | 📏 12 km dari Sudirman
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:4px">Stasiun Kereta</div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Gambir</div>
+        <div class="place-meta">📍 Jakarta Pusat (Pusat Kota)</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KA Jarak Jauh</span>
+          <span class="place-tag">Drop-off: Samping Barat</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          ⚠️ Area Ganjil Genap · Akses via Jl. Medan Merdeka Timur
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Pasar Senen</div>
+        <div class="place-meta">📍 Jakarta Pusat</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KA Ekonomi</span>
+          <span class="place-tag">Drop-off: Jl. Senen Raya</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Bekasi</div>
+        <div class="place-meta">📍 Bekasi Kota</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KRL + KA</span>
+          <span class="place-tag">Drop-off: Jl. Ir. Juanda</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          📏 ~32 km dari Jakarta | Akses via Tol JKT–Cikampek
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Bogor</div>
+        <div class="place-meta">📍 Kota Bogor</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KRL Terminus</span>
+          <span class="place-tag">Drop-off: Jl. Kapten Muslihat</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          📏 ~50 km dari Jakarta | 💳 Tol: Rp 14.000
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Karawang</div>
+        <div class="place-meta">📍 Karawang Kota</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KA Jarak Jauh</span>
+          <span class="place-tag">Parkir Luas</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          📏 ~85 km dari Jakarta | 💳 Tol: Rp 35.000
+        </div>
+      </div>
+    </div>
+
+    <div class="place-card">
+      <div class="place-icon-box">🚆</div>
+      <div class="place-info">
+        <div class="place-name">Stasiun Tangerang</div>
+        <div class="place-meta">📍 Kota Tangerang</div>
+        <div class="place-tags">
+          <span class="place-tag highlight">KRL</span>
+          <span class="place-tag">Drop-off: Area Stasiun</span>
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:var(--text2)">
+          📏 ~28 km dari Jakarta | 💳 Tol: Rp 9.000
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: MALL & HOTEL -->
+<div class="page" id="page-mall">
+  <div class="filter-tabs" id="mallFilter">
+    <div class="filter-tab active" onclick="filterMall('semua',this)">Semua</div>
+    <div class="filter-tab" onclick="filterMall('mall',this)">Mall</div>
+    <div class="filter-tab" onclick="filterMall('hotel',this)">Hotel</div>
+    <div class="filter-tab" onclick="filterMall('jakarta',this)">Jakarta</div>
+    <div class="filter-tab" onclick="filterMall('bekasi',this)">Bekasi</div>
+    <div class="filter-tab" onclick="filterMall('bogor',this)">Bogor</div>
+    <div class="filter-tab" onclick="filterMall('karawang',this)">Karawang</div>
+    <div class="filter-tab" onclick="filterMall('tangerang',this)">Tangerang</div>
+  </div>
+  <div class="section" id="mallList"></div>
+</div>
+
+<!-- PAGE: SOS -->
+<div class="page" id="page-sos">
+  <div class="section">
+    <div class="section-title">Kontak Darurat & Penting</div>
+
+    <div class="sos-card">
+      <div class="sos-icon">🚨</div>
+      <div class="sos-info">
+        <div class="sos-name">Jasa Marga Call Center</div>
+        <div class="sos-number">14080</div>
+        <div class="sos-desc">Info tol, gangguan, kecelakaan di jalan tol</div>
+      </div>
+      <button class="sos-call" onclick="telp('14080')">TELP</button>
+    </div>
+
+    <div class="sos-card">
+      <div class="sos-icon">🚑</div>
+      <div class="sos-info">
+        <div class="sos-name">Ambulans / Darurat Medis</div>
+        <div class="sos-number">119</div>
+        <div class="sos-desc">Layanan gawat darurat medis nasional</div>
+      </div>
+      <button class="sos-call" onclick="telp('119')">TELP</button>
+    </div>
+
+    <div class="sos-card">
+      <div class="sos-icon">🚔</div>
+      <div class="sos-info">
+        <div class="sos-name">Polisi / Keamanan</div>
+        <div class="sos-number">110</div>
+        <div class="sos-desc">Laporan kejahatan dan keamanan</div>
+      </div>
+      <button class="sos-call" onclick="telp('110')">TELP</button>
+    </div>
+
+    <div class="sos-card">
+      <div class="sos-icon">🚒</div>
+      <div class="sos-info">
+        <div class="sos-name">Pemadam Kebakaran</div>
+        <div class="sos-number">113</div>
+        <div class="sos-desc">Darurat kebakaran</div>
+      </div>
+      <button class="sos-call" onclick="telp('113')">TELP</button>
+    </div>
+
+    <div class="sos-card">
+      <div class="sos-icon">🛣️</div>
+      <div class="sos-info">
+        <div class="sos-name">Derek Tol Gratis</div>
+        <div class="sos-number">14080</div>
+        <div class="sos-desc">Layanan derek gratis di dalam tol Jasa Marga</div>
+      </div>
+      <button class="sos-call" onclick="telp('14080')">TELP</button>
+    </div>
+
+    <div class="sos-card">
+      <div class="sos-icon">📞</div>
+      <div class="sos-info">
+        <div class="sos-name">Waze / Google Maps Traffic</div>
+        <div class="sos-number">Info Real-time</div>
+        <div class="sos-desc">Cek kondisi jalan terkini</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-item active" id="nav-beranda" onclick="switchPage('beranda')">
+    <div class="bottom-nav-icon">🏠</div>
+    <span>Beranda</span>
+  </div>
+  <div class="bottom-nav-item" id="nav-toll" onclick="switchPage('toll')">
+    <div class="bottom-nav-icon">🛣️</div>
+    <span>Info Tol</span>
+  </div>
+  <div class="bottom-nav-item" id="nav-tempat" onclick="switchPage('tempat')">
+    <div class="bottom-nav-icon">📍</div>
+    <span>Tempat</span>
+  </div>
+  <div class="bottom-nav-item" id="nav-sos" onclick="switchPage('sos')">
+    <div class="bottom-nav-icon">🆘</div>
+    <span>SOS</span>
+  </div>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-title" id="modalTitle">Detail</div>
+    <div class="modal-sub" id="modalSub"></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// DATA
+const tempatData = [
+  { name: "Taman Mini Indonesia Indah (TMII)", area: "Jakarta Timur", icon: "🏛️", cat: ["wisata","pusat"], tags: ["Wisata Keluarga","Parkir Luas","Drop-off Mudah"], dist: "15 km dari Sudirman", toll: "Rp 5.000 (Tol Cawang)" },
+  { name: "Ancol Dreamland", area: "Jakarta Utara", icon: "🎡", cat: ["wisata","pusat"], tags: ["Pantai","Dufan","Parkir Besar"], dist: "12 km dari Sudirman", toll: "Bebas Tol" },
+  { name: "Monas (Monumen Nasional)", area: "Jakarta Pusat", icon: "🗽", cat: ["wisata","pusat"], tags: ["Ikon Jakarta","⚠️ Ganjil Genap"], dist: "Pusat Kota", toll: "Bebas Tol" },
+  { name: "Kota Tua Jakarta", area: "Jakarta Barat", icon: "🏚️", cat: ["wisata","pusat"], tags: ["Wisata Sejarah","Pejalan Kaki"], dist: "8 km dari Sudirman", toll: "Bebas Tol" },
+  { name: "Kebun Binatang Ragunan", area: "Jakarta Selatan", icon: "🦁", cat: ["wisata","pusat"], tags: ["Keluarga","Parkir Besar"], dist: "18 km dari Sudirman", toll: "Bebas Tol" },
+  { name: "Grand Indonesia", area: "Jakarta Pusat", icon: "🏬", cat: ["wisata","pusat"], tags: ["Mall Premium","⚠️ Ganjil Genap","Valet"], dist: "0 km (Sudirman)", toll: "Rp 0" },
+  { name: "Summarecon Mall Bekasi", area: "Bekasi", icon: "🏬", cat: ["wisata","bekasi"], tags: ["Mall Besar","Bioskop","Parkir Luas"], dist: "32 km dari Jakarta", toll: "Rp 12.500" },
+  { name: "Grand Metropolitan Mall", area: "Bekasi", icon: "🏬", cat: ["bekasi"], tags: ["Mall","Parkir Luas"], dist: "30 km dari Jakarta", toll: "Rp 12.500" },
+  { name: "Transpark Juanda Bekasi", area: "Bekasi", icon: "🏬", cat: ["bekasi"], tags: ["Mall Baru","Transit-Oriented"], dist: "30 km dari Jakarta", toll: "Rp 12.500" },
+  { name: "Kebun Raya Bogor", area: "Bogor Kota", icon: "🌿", cat: ["wisata","bogor"], tags: ["Wisata Alam","Kelas Dunia"], dist: "50 km dari Jakarta", toll: "Rp 14.000" },
+  { name: "Puncak / Cisarua", area: "Bogor", icon: "🏔️", cat: ["wisata","bogor"], tags: ["Wisata Alam","Akhir Pekan Padat"], dist: "70 km dari Jakarta", toll: "Rp 14.000" },
+  { name: "Botani Square Mall", area: "Bogor", icon: "🏬", cat: ["bogor"], tags: ["Mall","Bioskop","Parkir Luas"], dist: "50 km dari Jakarta", toll: "Rp 14.000" },
+  { name: "Karawang International Industrial City", area: "Karawang", icon: "🏭", cat: ["karawang"], tags: ["Kawasan Industri","Sering Dituju"], dist: "85 km dari Jakarta", toll: "Rp 35.000" },
+  { name: "Galuh Mas Karawang", area: "Karawang", icon: "🏬", cat: ["karawang"], tags: ["Mall","Pusat Kota Karawang"], dist: "85 km dari Jakarta", toll: "Rp 35.000" },
+  { name: "Bumi Serpong Damai (BSD City)", area: "Tangerang Selatan", icon: "🏙️", cat: ["tangerang"], tags: ["Kota Mandiri","Mall","Golf"], dist: "28 km dari Jakarta", toll: "Rp 9.000" },
+  { name: "Pantai Indah Kapuk (PIK)", area: "Jakarta Utara", icon: "🌴", cat: ["wisata","pusat"], tags: ["Wisata","Kuliner","Pantai"], dist: "25 km dari Sudirman", toll: "Rp 15.500 (JORR)" },
+  { name: "Tangerang City Mall", area: "Tangerang", icon: "🏬", cat: ["tangerang"], tags: ["Mall","Dekat Stasiun"], dist: "28 km dari Jakarta", toll: "Rp 9.000" },
+];
+
+const mallData = [
+  { name: "Grand Indonesia", area: "Jakarta Pusat", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Premium","Valet","⚠️ GG"], info: "Jl. MH Thamrin No.1", parkir: "Basement 5 lantai" },
+  { name: "Plaza Indonesia", area: "Jakarta Pusat", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Luxury","⚠️ GG"], info: "Jl. MH Thamrin", parkir: "Basement" },
+  { name: "Pacific Place", area: "Jakarta Selatan (SCBD)", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Premium","SCBD"], info: "Jl. Jend. Sudirman Kav. 52-53", parkir: "Besar" },
+  { name: "Plaza Semanggi", area: "Jakarta Selatan", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["⚠️ GG","Kuliner"], info: "Jl. Jend. Sudirman", parkir: "Ada" },
+  { name: "Mal Kelapa Gading", area: "Jakarta Utara", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Besar","Keluarga"], info: "Jl. Bulevar Kelapa Gading", parkir: "Luas" },
+  { name: "Ciputra World", area: "Jakarta Selatan", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Hotel Integrated","Bioskop"], info: "Jl. Prof. Dr. Satrio", parkir: "Ada" },
+  { name: "Summarecon Mall Bekasi", area: "Bekasi", icon: "🏬", type: "mall", cat: ["mall","bekasi"], tags: ["Besar","Bioskop"], info: "Jl. Bulevar Ahmad Yani", parkir: "Luas" },
+  { name: "Grand Metropolitan", area: "Bekasi", icon: "🏬", type: "mall", cat: ["mall","bekasi"], tags: ["Keluarga","Foodcourt"], info: "Jl. KH Noer Ali", parkir: "Luas" },
+  { name: "Lippo Mall Kemang", area: "Jakarta Selatan", icon: "🏬", type: "mall", cat: ["mall","jakarta"], tags: ["Expat Area","Kuliner"], info: "Jl. Kemang Raya", parkir: "Ada" },
+  { name: "Botani Square", area: "Bogor", icon: "🏬", type: "mall", cat: ["mall","bogor"], tags: ["Bioskop","Parkir Luas"], info: "Jl. Raya Pajajaran", parkir: "Luas" },
+  { name: "Tangcity Mall", area: "Tangerang", icon: "🏬", type: "mall", cat: ["mall","tangerang"], tags: ["Dekat Stasiun"], info: "Jl. Jend. Sudirman", parkir: "Ada" },
+  { name: "Galuh Mas Karawang", area: "Karawang", icon: "🏬", type: "mall", cat: ["mall","karawang"], tags: ["Pusat Kota"], info: "Jl. Ahmad Yani, Karawang", parkir: "Luas" },
+  // Hotels
+  { name: "Hotel Mulia Jakarta", area: "Jakarta Selatan", icon: "🏨", type: "hotel", cat: ["hotel","jakarta"], tags: ["Bintang 5","Valet","GG Area"], info: "Jl. Asia Afrika", parkir: "Valet & Umum" },
+  { name: "Grand Hyatt Jakarta", area: "Jakarta Pusat", icon: "🏨", type: "hotel", cat: ["hotel","jakarta"], tags: ["Bintang 5","⚠️ GG"], info: "Jl. MH Thamrin", parkir: "Basement" },
+  { name: "The Ritz-Carlton Pacific Place", area: "Jakarta Selatan", icon: "🏨", type: "hotel", cat: ["hotel","jakarta"], tags: ["Bintang 5","Valet"], info: "SCBD, Jl. Jend. Sudirman", parkir: "Valet" },
+  { name: "JW Marriott Jakarta", area: "Jakarta Selatan", icon: "🏨", type: "hotel", cat: ["hotel","jakarta"], tags: ["Bintang 5","Mega Kuningan"], info: "Jl. DR Ide Anak Agung Gde Agung", parkir: "Luas" },
+  { name: "Hotel Santika Premiere Bekasi", area: "Bekasi", icon: "🏨", type: "hotel", cat: ["hotel","bekasi"], tags: ["Bintang 4","Bisnis"], info: "Jl. M. Hasibuan", parkir: "Ada" },
+  { name: "Aston Karawang", area: "Karawang", icon: "🏨", type: "hotel", cat: ["hotel","karawang"], tags: ["Bintang 4","Bisnis"], info: "Jl. Tuparev", parkir: "Luas" },
+  { name: "Hotel Salak Heritage Bogor", area: "Bogor", icon: "🏨", type: "hotel", cat: ["hotel","bogor"], tags: ["Bintang 4","Heritage"], info: "Jl. Ir. H. Juanda", parkir: "Ada" },
+  { name: "Novotel Tangerang", area: "Tangerang", icon: "🏨", type: "hotel", cat: ["hotel","tangerang"], tags: ["Bintang 4","Bisnis"], info: "Jl. Jend. Sudirman", parkir: "Ada" },
+];
+
+// INIT
+let currentMallFilter = 'semua';
+let currentTempatFilter = 'semua';
+
+function init() {
+  updateClock();
+  setInterval(updateClock, 1000);
+  updateDate();
+  renderTempat('semua');
+  renderMall('semua');
+}
+
+function updateDate() {
+  const now = new Date();
+  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const str = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById('headerDate').textContent = str;
+
+  // Ganjil Genap
+  const day = now.getDay(); // 0=Sun
+  const date = now.getDate();
+  const isWeekend = day === 0 || day === 6;
+  const ggEl = document.getElementById('ggStatus');
+  const ggDetail = document.getElementById('ggDetail');
+
+  if (isWeekend) {
+    ggEl.textContent = 'BEBAS';
+    ggEl.className = 'gg-status';
+    ggEl.style.color = 'var(--green)';
+    ggDetail.textContent = 'Tidak berlaku di akhir pekan';
+  } else {
+    const isGanjil = date % 2 !== 0;
+    ggEl.textContent = isGanjil ? 'GANJIL' : 'GENAP';
+    ggEl.className = `gg-status ${isGanjil ? 'ganjil' : 'genap'}`;
+    ggDetail.textContent = `Plat ${isGanjil ? 'GANJIL' : 'GENAP'} dilarang 06:00–10:00 & 16:00–21:00`;
+  }
+}
+
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  const clock = `${h}:${m}:${s}`;
+  document.getElementById('ggClock').textContent = clock;
+
+  const hour = now.getHours();
+  const isActive = (hour >= 6 && hour < 10) || (hour >= 16 && hour < 21);
+  const el = document.getElementById('ggActiveNow');
+  if (isActive) {
+    el.textContent = '🔴 Sedang berlaku';
+    el.style.color = 'var(--red)';
+  } else {
+    el.textContent = '🟢 Tidak berlaku';
+    el.style.color = 'var(--green)';
+  }
+}
+
+function switchPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.bottom-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const navEl = document.getElementById('nav-' + page);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function cekPlat() {
+  const val = document.getElementById('platInput').value.trim();
+  const resultBox = document.getElementById('platResult');
+  const resultVal = document.getElementById('platResultVal');
+  const resultSub = document.getElementById('platResultSub');
+
+  if (!val) { alert('Masukkan nomor plat terlebih dahulu'); return; }
+
+  const match = val.match(/\d+/);
+  if (!match) { resultVal.textContent = '❓ Tidak ditemukan angka'; resultBox.classList.add('show'); return; }
+
+  const num = parseInt(match[0]);
+  const isGanjil = num % 2 !== 0;
+  const now = new Date();
+  const todayDate = now.getDate();
+  const todayGanjil = todayDate % 2 !== 0;
+  const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+  const hour = now.getHours();
+  const isGGHour = (hour >= 6 && hour < 10) || (hour >= 16 && hour < 21);
+
+  resultBox.classList.add('show');
+  resultVal.style.color = 'var(--accent)';
+
+  if (isWeekend) {
+    resultVal.textContent = '✅ BEBAS';
+    resultVal.style.color = 'var(--green)';
+    resultSub.textContent = `Plat ${num} (${isGanjil?'Ganjil':'Genap'}) — Akhir pekan, tidak ada ganjil genap.`;
+    return;
+  }
+
+  if (isGanjil === todayGanjil) {
+    if (isGGHour) {
+      resultVal.textContent = '🚫 DILARANG';
+      resultVal.style.color = 'var(--red)';
+      resultSub.textContent = `Plat ${num} (${isGanjil?'Ganjil':'Genap'}) dilarang saat ini di ruas GG. Jam berlaku sekarang.`;
+    } else {
+      resultVal.textContent = '⚠️ HATI-HATI';
+      resultVal.style.color = 'var(--yellow)';
+      resultSub.textContent = `Plat ${num} (${isGanjil?'Ganjil':'Genap'}) cocok hari ini, tapi hati-hati saat jam berlaku GG.`;
+    }
+  } else {
+    resultVal.textContent = '✅ BOLEH';
+    resultVal.style.color = 'var(--green)';
+    resultSub.textContent = `Plat ${num} (${isGanjil?'Ganjil':'Genap'}) — Hari ini ${isGanjil?'Genap':'Ganjil'}, Anda boleh lewat ruas GG.`;
+  }
+}
+
+const tollRates = {
+  'cikampek-tomang': {tarif: 20000, jarak: 73, waktu: 60},
+  'cikampek-semanggi': {tarif: 20000, jarak: 70, waktu: 55},
+  'cikampek-cawang': {tarif: 18000, jarak: 65, waktu: 50},
+  'bekasi_barat-tomang': {tarif: 12500, jarak: 32, waktu: 40},
+  'bekasi_barat-semanggi': {tarif: 12500, jarak: 30, waktu: 35},
+  'bekasi_barat-cawang': {tarif: 10000, jarak: 25, waktu: 30},
+  'cikarang-tomang': {tarif: 15500, jarak: 45, waktu: 45},
+  'cikarang-semanggi': {tarif: 15000, jarak: 42, waktu: 42},
+  'halim-tomang': {tarif: 8500, jarak: 18, waktu: 25},
+  'bogor-tomang': {tarif: 14000, jarak: 50, waktu: 55},
+  'bogor-cawang': {tarif: 14000, jarak: 55, waktu: 60},
+  'cengkareng-semanggi': {tarif: 18500, jarak: 22, waktu: 35},
+  'cengkareng-tomang': {tarif: 15000, jarak: 18, waktu: 30},
+  'serpong-tomang': {tarif: 11000, jarak: 28, waktu: 35},
+  'serpong-semanggi': {tarif: 12500, jarak: 30, waktu: 38},
+  'tangerang-tomang': {tarif: 9000, jarak: 22, waktu: 28},
+  'karawang-tomang': {tarif: 35000, jarak: 85, waktu: 75},
+  'karawang-semanggi': {tarif: 35000, jarak: 83, waktu: 72},
+};
+const golMultiplier = {1:1, 2:1.5, 3:2, 4:2.5, 5:3};
+
+function hitungToll() {
+  const asal = document.getElementById('tollAsal').value;
+  const tujuan = document.getElementById('tollTujuan').value;
+  const gol = parseInt(document.getElementById('tollGol').value);
+  const result = document.getElementById('tollResult');
+
+  if (!asal || !tujuan) { alert('Pilih gerbang asal dan tujuan'); return; }
+
+  const key = `${asal}-${tujuan}`;
+  const keyRev = `${tujuan}-${asal}`;
+  const data = tollRates[key] || tollRates[keyRev];
+  const mul = golMultiplier[gol] || 1;
+
+  result.classList.add('show');
+  if (data) {
+    const tarif = Math.round(data.tarif * mul / 500) * 500;
+    document.getElementById('tollResultTarif').textContent = `Rp ${tarif.toLocaleString('id')}`;
+    document.getElementById('tollResultInfo').textContent = `Jarak ±${data.jarak} km · Estimasi ${data.waktu} menit · Golongan ${gol}`;
+  } else {
+    document.getElementById('tollResultTarif').textContent = '~Rp 10.000–50.000';
+    document.getElementById('tollResultInfo').textContent = 'Estimasi umum. Pilih rute spesifik untuk hasil akurat.';
+  }
+}
+
+function renderTempat(cat) {
+  const list = document.getElementById('tempatList');
+  const filtered = cat === 'semua' ? tempatData : tempatData.filter(t => t.cat.includes(cat));
+  list.innerHTML = `<div class="section-title">Tempat Populer ${cat === 'semua' ? '' : '— '+cat.charAt(0).toUpperCase()+cat.slice(1)}</div>` +
+    filtered.map(t => `
+      <div class="place-card">
+        <div class="place-icon-box">${t.icon}</div>
+        <div class="place-info">
+          <div class="place-name">${t.name}</div>
+          <div class="place-meta">📍 ${t.area} · 📏 ${t.dist}</div>
+          <div class="place-tags">
+            ${t.tags.map(tg => `<span class="place-tag ${tg.includes('⚠️')?'highlight':''}">${tg}</span>`).join('')}
+          </div>
+          <div style="margin-top:6px;font-size:11px;color:var(--text3)">💳 ${t.toll}</div>
+        </div>
+      </div>
+    `).join('');
+}
+
+function filterTempat(cat, el) {
+  document.querySelectorAll('#tempatFilter .filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderTempat(cat);
+}
+
+function renderMall(cat) {
+  const list = document.getElementById('mallList');
+  const filtered = cat === 'semua' ? mallData : mallData.filter(m => m.cat.includes(cat));
+  list.innerHTML = `<div class="section-title">Mall & Hotel ${cat === 'semua' ? '' : '— '+cat.charAt(0).toUpperCase()+cat.slice(1)}</div>` +
+    filtered.map(m => `
+      <div class="place-card">
+        <div class="place-icon-box">${m.icon}</div>
+        <div class="place-info">
+          <div class="place-name">${m.name}</div>
+          <div class="place-meta">📍 ${m.area}</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:6px">${m.info}</div>
+          <div class="place-tags">
+            ${m.tags.map(tg => `<span class="place-tag ${tg.includes('⚠️')||tg.includes('Bintang 5')?'highlight':''}">${tg}</span>`).join('')}
+          </div>
+          <div style="margin-top:6px;font-size:11px;color:var(--text2)">🅿️ ${m.parkir}</div>
+        </div>
+      </div>
+    `).join('');
+}
+
+function filterMall(cat, el) {
+  document.querySelectorAll('#mallFilter .filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderMall(cat);
+}
+
+function showTollDetail(id) {
+  const details = {
+    'jakarta-cikampek': {
+      title: 'Tol Jakarta–Cikampek',
+      sub: 'Via Gerbang Halim → Bekasi Barat → Cikarang → Cikampek',
+      rows: [
+        {label:'Jarak Total', val:'±73 km'},
+        {label:'Estimasi Waktu', val:'~60-90 menit', cls:''},
+        {label:'Tarif Gol I', val:'Rp 20.000', cls:'accent'},
+        {label:'Tarif Gol II', val:'Rp 30.000', cls:'accent'},
+        {label:'Tarif Gol III', val:'Rp 40.000', cls:'accent'},
+        {label:'Rest Area Km 19', val:'✅ Ada SPBU, Makan'},
+        {label:'Rest Area Km 39', val:'✅ Ada SPBU, Makan'},
+        {label:'Rest Area Km 57', val:'✅ Ada SPBU, Makan'},
+        {label:'Status', val:'⚠️ Padat jam sibuk', cls:'red'},
+        {label:'Berlaku GG', val:'Km 0–47 (Halim–Bekasi Barat)'},
+      ]
+    },
+    'jakarta-bogor': {
+      title: 'Tol Jagorawi (Jakarta–Bogor)',
+      sub: 'Via Cawang → Cijantung → Ciawi → Bogor',
+      rows: [
+        {label:'Jarak Total', val:'±50 km'},
+        {label:'Estimasi Waktu', val:'~45-60 menit'},
+        {label:'Tarif Gol I', val:'Rp 14.000', cls:'accent'},
+        {label:'Tarif Gol II', val:'Rp 21.000', cls:'accent'},
+        {label:'Rest Area Km 10', val:'✅ Ada SPBU'},
+        {label:'Rest Area Km 38', val:'✅ Ada SPBU, Makan'},
+        {label:'Status', val:'🟢 Lancar', cls:'green'},
+        {label:'Catatan', val:'Padat saat weekend/hujan'},
+      ]
+    }
+  };
+  const d = details[id];
+  if (!d) return;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalSub').textContent = d.sub;
+  document.getElementById('modalBody').innerHTML = d.rows.map(r =>
+    `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-value ${r.cls||''}">${r.val}</span></div>`
+  ).join('');
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById('modalOverlay').classList.remove('show');
+}
+
+function telp(num) {
+  window.location.href = 'tel:' + num;
+}
+
+init();
+</script>
+</body>
+</html>
